@@ -9,3 +9,4 @@
 .env.production.local
 .eslintrc.json
 .prettierrc.json
+package-lock.json
