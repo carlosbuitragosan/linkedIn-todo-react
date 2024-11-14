@@ -8,9 +8,6 @@ function TodoList() {
   const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
 
-  const handleRemove = (todo) => {
-    dispatch(removeTodo({ text: todo.text }));
-  };
   return (
     <div className="list-wrapper">
       <NewTodoForm />
@@ -18,7 +15,7 @@ function TodoList() {
         <TodoListItem
           todo={todo}
           key={todo.text}
-          removeTodo={() => handleRemove(todo)}
+          removeTodo={() => dispatch(removeTodo({ text: todo.text }))}
         />
       ))}
     </div>
