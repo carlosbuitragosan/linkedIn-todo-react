@@ -10,7 +10,7 @@ function TodoList() {
     <div className="list-wrapper">
       <NewTodoForm />
       {todos.map((todo) => (
-        <TodoListItem todoText={todo} key={todo.text} />
+        <TodoListItem todo={todo} key={todo.text} />
       ))}
     </div>
   );
