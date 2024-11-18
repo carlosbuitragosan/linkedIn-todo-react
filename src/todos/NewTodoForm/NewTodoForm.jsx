@@ -9,7 +9,7 @@ function NewTodoForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputValue.trim()) {
-      dispatch(createTodo({ text: inputValue }));
+      dispatch(createTodo(inputValue));
       setInputValue("");
     }
   };

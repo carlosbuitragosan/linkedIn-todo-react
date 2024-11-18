@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import {
+  markTodoAsCompleted,
+  undoTodoCompletion,
   removeTodo,
-  markAsCompleted,
-  undoCompleted,
 } from "../../redux/todosSlice";
 
 function TodoListItem({ todo }) {
@@ -17,7 +17,7 @@ function TodoListItem({ todo }) {
           <button
             type="button"
             className="completed-button"
-            onClick={() => dispatch(markAsCompleted({ text: todo.text }))}
+            onClick={() => dispatch(markTodoAsCompleted(todo.id))}
           >
             Mark as Completed
           </button>
@@ -27,7 +27,7 @@ function TodoListItem({ todo }) {
             <button
               type="button"
               className="undo-completed"
-              onClick={() => dispatch(undoCompleted({ text: todo.text }))}
+              onClick={() => dispatch(undoTodoCompletion(todo.id))}
             >
               Undo
             </button>
@@ -36,7 +36,7 @@ function TodoListItem({ todo }) {
         <button
           type="button"
           className="remove-button"
-          onClick={() => dispatch(removeTodo({ text: todo.text }))}
+          onClick={() => dispatch(removeTodo(todo.id))}
         >
           Remove
         </button>
