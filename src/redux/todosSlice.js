@@ -23,7 +23,8 @@ export const createTodo = createAsyncThunk("todos/createTodo", async (text) => {
   if (!response.ok) {
     throw new Error("Failed to add todo");
   }
-  return todo;
+  const createTodo = await response.json();
+  return createTodo;
 });
 
 export const markTodoAsCompleted = createAsyncThunk(
@@ -46,7 +47,7 @@ export const markTodoAsCompleted = createAsyncThunk(
 export const undoTodoCompletion = createAsyncThunk(
   "todos/undoTodoCompletion",
   async (id) => {
-    const response = await fetch("http://localhost:5000/todos/undo", {
+    const response = await fetch("http://localhost:5000/todos/undoCompleted", {
       method: "PUT",
       headers: {
         "Content-type": "application/json",

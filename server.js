@@ -16,32 +16,45 @@ app.get("/todos", (req, res) => {
 
 // ADD NEW TODO
 app.post("/todos", (req, res) => {
-  const newTodo = { text: req.body.text, isCompleted: false };
+  const { id, text } = req.body;
+  const newTodo = { id, text, isCompleted: false };
   todos.push(newTodo);
   res.status(201).json(newTodo);
 });
 
 // MARK AS COMPLETED
-app.put("/todos/undo", (req, res) => {
-  const { text } = req.body;
-  const todo = todos.find((todo) => todo.text === text);
+app.put("/todos/completed", (req, res) => {
+  const { id } = req.body;
+  const todo = todos.find((todo) => todo.id === id);
   if (todo) {
-    todo.isCompleted = false;
+    todo.isCompleted = true;
     res.json(todo);
   } else {
-    res.status(404).send("Todo not found.");
+    res.status(404).json("Todo not found.");
   }
 });
 
 // REMOVE TODO
-app.delete("todos/", (req, res) => {
-  const { text } = req.body;
-  const todo = todos.find((todo) => todo.text === text);
+app.delete("/todos", (req, res) => {
+  const { id } = req.body;
+  const todo = todos.find((todo) => todo.id === id);
   if (todo) {
-    todos = todos.filter((todo) => todo.text !== text);
+    todos = todos.filter((todo) => todo.id !== id);
     res.status(204).send();
   } else {
     res.status(404).send("No todo found.");
+  }
+});
+
+// UNDO MARK AS COMPLETED
+app.put("/todos/undoCompleted", (req, res) => {
+  const { id } = req.body;
+  const todo = todos.find((todo) => todo.id === id);
+  if (todo) {
+    todo.isCompleted = false;
+    res.json(todo);
+  } else {
+    res.status(404).json("Todo not found.");
   }
 });
 
